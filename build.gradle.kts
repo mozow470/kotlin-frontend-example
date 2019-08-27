@@ -40,10 +40,15 @@ kotlinFrontend {
 
         devDependency("webpack")
         devDependency("webpack-serve")
+        devDependency("webpack-dev-server")
         devDependency("css-loader")
         devDependency("style-loader")
         devDependency("babel-loader")
+        devDependency("@babel/core", version = "7.1.2")
+        devDependency("@babel/preset-env", version = "7.4.5")
         devDependency("babel-core")
+        devDependency("html-webpack-plugin")
+        devDependency("mini-css-extract-plugin")
     }
 
     bundle("webpack", delegateClosureOf<WebPackExtension> {
@@ -51,8 +56,9 @@ kotlinFrontend {
         mode = "production"
         bundleName = "main"
         sourceMapEnabled = true
-        contentPath = file("$buildDir/bundle")
+        contentPath = file("src/main/web")
         port = 3000
+        webpackConfigFile = "${project.projectDir.path}/webpack.config.js"
     })
 }
 
@@ -64,7 +70,6 @@ tasks {
         kotlinOptions.moduleKind = "commonjs"
         kotlinOptions.main = "call"
     }
-
 }
 
 configure<JavaPluginConvention> {
