@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.gradle.frontend.webpack.WebPackExtension
+
 plugins {
     id("kotlin2js") version "1.3.41"
     id("org.jetbrains.kotlin.frontend") version "0.0.45"
@@ -24,6 +26,7 @@ dependencies {
 }
 
 kotlinFrontend {
+    downloadNodeJsVersion = "latest"
     sourceMaps = false
 
     npm {
@@ -33,21 +36,35 @@ kotlinFrontend {
         dependency("react-dom")
         dependency("react-router-dom")
         dependency("jquery")
+        dependency("core-js", version = "3")
 
+        devDependency("webpack")
+        devDependency("webpack-serve")
         devDependency("css-loader")
         devDependency("style-loader")
         devDependency("babel-loader")
         devDependency("babel-core")
     }
+
+    bundle("webpack", delegateClosureOf<WebPackExtension> {
+//        mode = "development"
+        mode = "production"
+        bundleName = "main"
+        sourceMapEnabled = true
+        contentPath = file("$buildDir/bundle")
+        port = 3000
+    })
 }
 
 tasks {
     compileKotlin2Js {
         kotlinOptions.metaInfo = true
+        kotlinOptions.outputFile = "${project.buildDir.path}/output_js/${project.name}.js"
         kotlinOptions.sourceMap = true
         kotlinOptions.moduleKind = "commonjs"
         kotlinOptions.main = "call"
     }
+
 }
 
 configure<JavaPluginConvention> {
