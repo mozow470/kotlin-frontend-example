@@ -52,12 +52,12 @@ kotlinFrontend {
     }
 
     bundle("webpack", delegateClosureOf<WebPackExtension> {
-//        mode = "development"
-        mode = "production"
+        mode = "development"
+//        mode = "production"
         bundleName = "main"
         sourceMapEnabled = true
-        contentPath = file("src/main/web")
-        port = 3000
+        contentPath = file("./build/bundle/")
+        port = 5555
         webpackConfigFile = "${project.projectDir.path}/webpack.config.js"
     })
 }
@@ -68,7 +68,7 @@ tasks {
         kotlinOptions.outputFile = "${project.buildDir.path}/output_js/${project.name}.js"
         kotlinOptions.sourceMap = true
         kotlinOptions.moduleKind = "commonjs"
-        kotlinOptions.main = "call"
+//        kotlinOptions.main = "call"
     }
 }
 

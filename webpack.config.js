@@ -4,7 +4,7 @@ const HtmlWebpackPlugin = require('./build/node_modules/html-webpack-plugin');
 const path = require('path');
 
 module.exports = {
-    entry: config.moduleName,
+    entry: config.bundlePath,
     output: {
         path: path.resolve('./bundle'),
         publicPath: '/',
@@ -23,7 +23,7 @@ module.exports = {
     devtool: '#source-map',
     plugins: [
         new HtmlWebpackPlugin({
-            template:  path.resolve('./src/main/web') + '/index.html',
+            template: './../src/main/web/index.html',
             hash: true,
             inject: true,
             minify: {
@@ -35,4 +35,4 @@ module.exports = {
     ]
 };
 
-console.log(module.exports.resolve.modules);
+// console.log(module.exports.resolve.modules);
