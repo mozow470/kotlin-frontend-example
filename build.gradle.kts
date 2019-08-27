@@ -54,18 +54,23 @@ kotlinFrontend {
         devDependency("babel-loader")
         devDependency("@babel/core", version = "7.1.2")
         devDependency("@babel/preset-env", version = "7.4.5")
+        devDependency("@babel/plugin-syntax-dynamic-import", version = "7.2.0")
+        devDependency("@babel/plugin-proposal-optional-chaining", version = "7.2.0")
+        devDependency("@babel/plugin-transform-runtime", version = "7.5.5")
         dependency("core-js", version = "3")
 
         devDependency("terser-webpack-plugin")
         devDependency("html-webpack-plugin")
         devDependency("mini-css-extract-plugin")
+        devDependency("optimize-css-assets-webpack-plugin")
+        devDependency("hard-source-webpack-plugin")
     }
 
     bundle("webpack", delegateClosureOf<WebPackExtension> {
         mode = "development"
 //        mode = "production"
         bundleName = "main"
-        sourceMapEnabled = true
+        sourceMapEnabled = false
         contentPath = file("./build/bundle/")
         port = 5555
         webpackConfigFile = "${project.projectDir.path}/webpack.config.js"
@@ -78,7 +83,7 @@ tasks {
         kotlinOptions.outputFile = "${project.buildDir.path}/output_js/${project.name}.js"
         kotlinOptions.sourceMap = true
         kotlinOptions.moduleKind = "commonjs"
-//        kotlinOptions.main = "call"
+        kotlinOptions.main = "call"
     }
 }
 
