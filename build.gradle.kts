@@ -26,7 +26,7 @@ dependencies {
 }
 
 kotlinFrontend {
-    downloadNodeJsVersion = "latest"
+    downloadNodeJsVersion = "10.16.0"
     sourceMaps = false
 
     npm {
@@ -36,17 +36,27 @@ kotlinFrontend {
         dependency("react-dom")
         dependency("react-router-dom")
         dependency("jquery")
-        dependency("core-js", version = "3")
 
         devDependency("webpack")
         devDependency("webpack-serve")
         devDependency("webpack-dev-server")
+
         devDependency("css-loader")
+        devDependency("sass-loader", version = "7.1.0")
+        devDependency("node-sass", version = "4.9.3")
+        devDependency("postcss-loader")
+        devDependency("precss")
         devDependency("style-loader")
+        devDependency("autoprefixer")
+
+        devDependency("file-loader")
+
         devDependency("babel-loader")
         devDependency("@babel/core", version = "7.1.2")
         devDependency("@babel/preset-env", version = "7.4.5")
-        devDependency("babel-core")
+        dependency("core-js", version = "3")
+
+        devDependency("terser-webpack-plugin")
         devDependency("html-webpack-plugin")
         devDependency("mini-css-extract-plugin")
     }
