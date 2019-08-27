@@ -62,7 +62,7 @@ module.exports = {
             filename: 'css/[name].css',
         }),
         new HtmlWebpackPlugin({
-            template: './../src/main/web/index.html',
+            template: './../src/main/resources/index.html',
             hash: true,
             inject: true,
             minify: {
